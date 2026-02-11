@@ -41,7 +41,7 @@ class CrashHandler
         $details .= "Message: $message \n";
         $details .= "Original Message:\n------------------------------------------------- \n\n\n";
         // Manage content:
-        $jsonContent = "\n\nJson:\n-------------------------------------------------\n"
+        $jsonContent = "\n\nJson:\n-------------------------------------------------\n";
         $jsonContent .= json_encode($content, JSON_PRETTY_PRINT);
         // Create crash-dump
         Storage::disk('crashes')->put($path, $details . $message . $jsonContent);
