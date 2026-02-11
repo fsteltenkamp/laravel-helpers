@@ -29,4 +29,21 @@ class CrashHandler
         }
         Log::info('[CrashHandler] Crash-Report abgelegt unter: ' . $path);
     }
+
+    public static function Log($message, $content, $prefix = '')
+    {
+        Log::debug('[CrashHandler] Log: ' . $message, [$content]);
+        $date = date('Ymd-His');
+        $filename = $date . '-log.txt';
+        $path = $prefix . '/' . $filename;
+        $details = "Date: $date \n";
+        $details .= "Reporter: $prefix \n";
+        $details .= "Message: $message \n";
+        $details .= "Original Message:\n------------------------------------------------- \n\n\n";
+        // Manage content:
+        $jsonContent = "\n\nJson:\n-------------------------------------------------\n"
+        $jsonContent .= json_encode($content, JSON_PRETTY_PRINT);
+        // Create crash-dump
+        Storage::disk('crashes')->put($path, $details . $message . $jsonContent);
+    }
 }
