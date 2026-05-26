@@ -50,7 +50,7 @@ class CrashHandler
      * @param string $prefix
      * @return void
      */
-    public static function Log($message, $content, $prefix = '')
+    public static function Log($message = '', $prefix = '', $content = '')
     {
         Log::debug('[CrashHandler] Log: ' . $message, [$content]);
         $date = date('Ymd-His');
